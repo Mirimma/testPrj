@@ -62,8 +62,23 @@
         const list = List({items});
         const button = Button({ text: "+ New Task", onClick: addItem });
         const appTitle = "To Do List";
+        //const appTitle = document.getElementById("To Do List");
+        //const inlineStyles = appTitle.style;
         //appTitle.style.color = "red";
-        //const searchField = 
+        //appTitle.style.cssText = 'color: blue';
+        //appTitle.setAttribute('style', 'color:red');
+
+
+        //const searchField = Input({ type: text, placeholder: "Search Task" });
+        //const searchField = document.getElementById('Search');
+        //const searchResult = document.getElementById('Results');
+        //let search_term = '';
+        // search.addEventListener('input', (event) => {
+        //     search_term = event.target.value.toLowerCase();
+        //     showList();
+        // });
+     
+
         div.append(appTitle, button, list);
         
         return div;
