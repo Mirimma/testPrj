@@ -61,25 +61,13 @@
         const div = document.createElement("div");
         const list = List({items});
         const button = Button({ text: "+ New Task", onClick: addItem });
-        const appTitle = "To Do List";
-        //const appTitle = document.getElementById("To Do List");
-        //const inlineStyles = appTitle.style;
-        //appTitle.style.color = "red";
-        //appTitle.style.cssText = 'color: blue';
-        //appTitle.setAttribute('style', 'color:red');
+        
+        //const title = "To Do List"; //added a title in the code manually
 
+        const title = document.getElementsByTagName('title'); //get the title from the html using DOM
+        //title.style.color = 'red'; can't apply any style here - don't know why - it's just disappeared in browser, tried to use [0] as an element number above
 
-        //const searchField = Input({ type: text, placeholder: "Search Task" });
-        //const searchField = document.getElementById('Search');
-        //const searchResult = document.getElementById('Results');
-        //let search_term = '';
-        // search.addEventListener('input', (event) => {
-        //     search_term = event.target.value.toLowerCase();
-        //     showList();
-        // });
-     
-
-        div.append(appTitle, button, list);
+        div.append(title, button, list);
         
         return div;
     }
