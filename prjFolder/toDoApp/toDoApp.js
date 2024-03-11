@@ -44,6 +44,16 @@
         return button;
     }
 
+    function Title({text}) {
+        const title = document.createElement("title");
+        title.innerHTML = text;
+        return title;
+    }
+
+
+
+
+
 
     /**
      * App container
@@ -61,14 +71,11 @@
         const div = document.createElement("div");
         const list = List({items});
         const button = Button({ text: "+ New Task", onClick: addItem });
-        
-        //const title = "To Do List"; //added a title in the code manually
-
-        const title = document.getElementsByTagName('title'); //get the title from the html using DOM
-        //title.style.color = 'red'; can't apply any style here - don't know why - it's just disappeared in browser, tried to use [0] as an element number above
+        const title = Title({ text: "To Do List"});
+        title.classList.add("Title");
 
         div.append(title, button, list);
-        
+    
         return div;
     }
 
