@@ -50,10 +50,23 @@
         return title;
     }
 
+    function SearchField({ text }) {
+        const searchField = document.createElement("input");
+        searchField.innerHTML = text;
+        return searchField;
+}
 
+    function AllTasksTitle({ text }) {
+        const allTasksTitle = document.createElement("title");
+        allTasksTitle.innerHTML = text;
+        return allTasksTitle;
+}
 
-
-
+    function CompletedTasksTitle({ text }) {
+        const completedTasksTitle = document.createElement("title");
+        completedTasksTitle.innerHTML = text;
+        return completedTasksTitle;
+    }
 
     /**
      * App container
@@ -71,10 +84,22 @@
         const div = document.createElement("div");
         const list = List({items});
         const button = Button({ text: "+ New Task", onClick: addItem });
+        button.classList.add("AddTaskBtn");
+
         const title = Title({ text: "To Do List"});
         title.classList.add("Title");
 
-        div.append(title, button, list);
+        const searchField = SearchField({});
+        searchField.classList.add("SearchBox");
+        searchField.placeholder = "Search Task";
+
+        const allTasksTitle = AllTasksTitle({text: "All Tasks"});
+        allTasksTitle.classList.add("AllTasksTitle");
+
+        const completedTasksTitle = CompletedTasksTitle({ text: "Completed Tasks" });
+        completedTasksTitle.classList.add("CompletedTasksTitle");
+
+        div.append(title, searchField, button, allTasksTitle, list, completedTasksTitle);
     
         return div;
     }
