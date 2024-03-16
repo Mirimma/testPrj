@@ -54,3 +54,19 @@ font-size: 16px;
     font-weight: 700;
     font-size: 24px;
 }
+
+.Li {
+    color: 
+#1D1D1D;
+font-size: 18px;
+font-weight: 400;
+line-height: 2.5;
+}
+
+.Ul{
+    list-style-type:none;
+}
+
+.TrashBinIcon{
+    margin-left: 30%;
+}
