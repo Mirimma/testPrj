@@ -23,74 +23,12 @@
      * @param items {string[]}
      * @returns {HTMLElement} - List element
      */
-    // function List({items}) {
-    //     const listItems = items.map((item) => `<li>${item}</li>`).join("");
-    //     const ul = document.createElement("ul");
-    //     ul.innerHTML = listItems;
-    //     return ul;
-    // }
-
-
-    // function List({items}) {
-
-    //     const li = document.createElement("li");
-    //     let checkboxEl = document.createElement("checkbox");  
-    //     let textEl = document.createTextNode(`${items}`);
-
-    //     li.appendChild(checkboxEl, textEl);
-    //     //const listItems = items.map((item) => `<li>${item}</li>`).join("");
-
-    //     const ul = document.createElement("ul");
-    //     ul.innerHTML = li;
-
-    //     //li.innerHTML = '<input type = "checkbox">' + `${ items }`;
-    //     //document.body.innerHTML = li;
-
-    //     return ul;
-    // }
     
-    
-    //     function ListItem({items}) {
+    function ListItem({ items }) {
+        const list = document.createElement("ul");
+        list.classList.add("Ul");
 
-    //     const li = document.createElement("li");            
-    //     const checkbox = document.createElement("input");
-    //         checkbox.type = "checkbox";
-    //         //checkbox.name = `${items}`;
-
-    //     let textEl = document.createElement('div');
-    //     textEl.innerHTML = `${items}`;
-
-    //     li.appendChild(checkbox, textEl);
-    //     li.innerHTML = '<input type = "checkbox">' + `${items}`;
-   
-    //     //const listItems = items.map((item) => `<li>${item}</li>`).join("");       
-    //     // const ul = document.createElement("ul");
-    //     // ul.innerHTML = li.innerHTML;
-    //     return li;
-    // }
-      
-
-    //     function ListItem({items}) {
- 
-    //         const li = document.createElement("li");            
-    //         const checkbox = document.createElement("input");
-    //         checkbox.type = "checkbox";
-
-    //         let textEl = document.createElement('div');
-    //         textEl.innerHTML = items;
-
-    //         li.appendChild(checkbox, textEl);
-
-    //         const listItems = items.map(item => ListItem(item));
-
-    //     return listItems;
-    // }
-    
-function ListItem({ items }) {
-    const list = document.createElement("ul");
-    list.classList.add("Ul");
-
-    const trashBinIconSvg = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        const trashBinIconSvg = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="16" height="16" fill="white" />
         <path d="M7 3H9C9 2.44772 8.55228 2 8 2C7.44772 2 7 2.44772 7 3ZM6 3C6 1.89543 6.89543 1 8 1C9.10457 1 10 1.89543 10 3H14C14.2761 3 14.5 3.22386 14.5 3.5C14.5 3.77614 14.2761 4 14 4H13.4364L12.2313 12.8378C12.0624 14.0765 11.0044 15 9.75422 15H6.24578C4.99561 15 3.93762 14.0765 3.76871 12.8378L2.56355 4H2C1.72386 4 1.5 3.77614 1.5 3.5C1.5 3.22386 1.72386 3 2 3H6ZM7 6.5C7 6.22386 6.77614 6 6.5 6C6.22386 6 6 6.22386 6 6.5V11.5C6 11.7761 6.22386 12 6.5 12C6.77614 12 7 11.7761 7 11.5V6.5ZM9.5 6C9.77614 6 10 6.22386 10 6.5V11.5C10 11.7761 9.77614 12 9.5 12C9.22386 12 9 11.7761 9 11.5V6.5C9 6.22386 9.22386 6 9.5 6ZM4.75954 12.7027C4.86089 13.4459 5.49568 14 6.24578 14H9.75422C10.5043 14 11.1391 13.4459 11.2405 12.7027L12.4272 4H3.57281L4.75954 12.7027Z" fill="#838383" />
     </svg>`;
@@ -123,12 +61,6 @@ function ListItem({ items }) {
 
     return list;
 }
-
-    
-    
-    
-    
-    
 
     /**
      * Button component
@@ -167,6 +99,26 @@ function ListItem({ items }) {
         return completedTasksTitle;
     }
 
+function CreateModal({ titleText, cancelBtnText }) {
+    const modalWindow = document.createElement("div");
+    modalWindow.classList.add("Modal");
+
+    const modalTitle = document.createElement("title");
+    modalTitle.classList.add("ModalTitle");
+    modalTitle.textContent = titleText;
+
+    const cancelBtn = document.createElement("button");
+    cancelBtn.classList.add("ModalCancelBtn");
+    cancelBtn.textContent = cancelBtnText;
+
+    modalWindow.appendChild(modalTitle);
+    modalWindow.appendChild(cancelBtn);
+
+    return modalWindow;
+}
+
+
+
     /**
      * App container
      * @returns {HTMLDivElement} - The app container
@@ -175,17 +127,31 @@ function ListItem({ items }) {
 
     function App() {
         let taskTitle;
-        const [items, setItems] = useState(["Task 1 + `${taskTitle}`", "Task 2 + `${taskTitle}`", "Task 3 + `${taskTitle}`"]);
+        const [items, setItems] = useState(["Task 1", "Task 2", "Task 3"]);
 
         function addItem() {
-            setItems([...items, `Task ${items.length + 1}`, `${taskTitle}`]);
+            setItems([...items, `Task ${items.length + 1}: ${taskTitle}`]);
         }
 
         const div = document.createElement("div");
+
         const list = ListItem({ items });
         list.classList.add("Li");
 
-        const button = Button({ text: "+ New Task", onClick: addItem });
+        const modalWindow = CreateModal({ titleText: "Add New Task", cancelBtnText: "Cancel" });
+        document.body.appendChild(modalWindow);
+
+        // button.addEventListener("click", () => {
+        //     const modalWindow = CreateModal({ text: "Modal Title" });
+        //     document.body.appendChild(modalWindow);
+        //     modalWindow.style.display = "block";
+    
+        // });
+        // document.body.appendChild(button);
+
+        const button = Button({ text: "+ New Task", onClick: () => {
+            modalWindow.style.display = "block";
+        }});
         button.classList.add("AddTaskBtn");
 
         const title = Title({ text: "To Do List"});
@@ -203,7 +169,7 @@ function ListItem({ items }) {
 
 
         div.append(title, searchField, button, allTasksTitle, list, completedTasksTitle);
-    
+
         return div;
     }
 

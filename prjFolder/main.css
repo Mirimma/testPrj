@@ -70,3 +70,31 @@ line-height: 2.5;
 .TrashBinIcon{
     margin-left: 30%;
 }
+
+.Modal{
+    display: none;
+    background-color: rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 1;
+    overflow: auto;
+    width: 524px;
+    height: 371px;
+    margin-left: 30%;
+    margin-top: -10%;
+    flex-direction: column;
+}
+
+.ModalTitle{
+    color: #000000;
+    font-size: 24px;
+    font-weight: 700;
+    font-size: 18px;
+    display: flex;
+    margin-left: 35%;
+    margin-top: 5%;
+}
+
+.ModalCancelBtn{
+    color: aqua;
+    background-color: blueviolet;
+}
