@@ -81,6 +81,11 @@
         return title;
     }
 
+    // function ModalOverlay() {
+    //     const modalOverlay = document.createElement("div");
+    //     return modalOverlay;
+    // }
+
     function SearchField({ text }) {
         const searchField = document.createElement("input");
         searchField.innerHTML = text;
@@ -100,8 +105,14 @@
     }
 
 function CreateModal({ titleText, cancelBtnText }) {
+    const modalOverlay = document.createElement("div");
+    modalOverlay.classList.add("ModalOverlay");
+
+    document.body.appendChild(modalOverlay);
+
     const modalWindow = document.createElement("div");
     modalWindow.classList.add("Modal");
+    modalOverlay.appendChild(modalWindow);
 
     const modalTitle = document.createElement("title");
     modalTitle.classList.add("ModalTitle");
@@ -110,6 +121,10 @@ function CreateModal({ titleText, cancelBtnText }) {
     const cancelBtn = document.createElement("button");
     cancelBtn.classList.add("ModalCancelBtn");
     cancelBtn.textContent = cancelBtnText;
+
+    cancelBtn.addEventListener("click", () => {
+    modalOverlay.style.display = "none";
+    });
 
     modalWindow.appendChild(modalTitle);
     modalWindow.appendChild(cancelBtn);
@@ -141,6 +156,11 @@ function CreateModal({ titleText, cancelBtnText }) {
         const modalWindow = CreateModal({ titleText: "Add New Task", cancelBtnText: "Cancel" });
         document.body.appendChild(modalWindow);
 
+        // const modalOverlay = modalOverlay({});
+        // //modalOverlay.classList.add("ModalOverlay");
+        // document.body.appendChild(modalOverlay);
+        // modalOverlay.appendChild(modalWindow);
+
         // button.addEventListener("click", () => {
         //     const modalWindow = CreateModal({ text: "Modal Title" });
         //     document.body.appendChild(modalWindow);
@@ -153,6 +173,15 @@ function CreateModal({ titleText, cancelBtnText }) {
             modalWindow.style.display = "block";
         }});
         button.classList.add("AddTaskBtn");
+
+        // const cancelBtn = Button({
+        //     text: "Cancel", onClick: () => {
+        //         modalWindow.style.display = "none";
+        //     }
+        // });
+        //cancelBtn.appendChild(modalWindow);
+
+
 
         const title = Title({ text: "To Do List"});
         title.classList.add("Title");
