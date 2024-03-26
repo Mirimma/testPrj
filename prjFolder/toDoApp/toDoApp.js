@@ -99,7 +99,7 @@
         return completedTasksTitle;
     }
 
-    function CreateModal({ titleText, cancelBtnText }) {
+    function CreateModal({ titleText, cancelBtnText, addTaskBtnText }) {
         const modalOverlay = document.createElement("div");
         modalOverlay.classList.add("ModalOverlay");
         modalOverlay.style.display = "none";
@@ -123,8 +123,13 @@
         modalOverlay.style.display = "none";
         });
 
+        const addTaskBtn = document.createElement("button");
+        addTaskBtn.classList.add("ModalAddTaskBtn");
+        addTaskBtn.textContent = addTaskBtnText;
+
         modalWindow.appendChild(modalTitle);
         modalWindow.appendChild(cancelBtn);
+        modalWindow.appendChild(addTaskBtn);
 
         return { modalOverlay, modalWindow };
     }
@@ -150,7 +155,7 @@
         const list = ListItem({ items });
         list.classList.add("Li");
 
-        const { modalOverlay, modalWindow } = CreateModal({ titleText: "Add New Task", cancelBtnText: "Cancel" });
+        const { modalOverlay, modalWindow } = CreateModal({ titleText: "Add New Task", cancelBtnText: "Cancel", addTaskBtnText: "Add Task" });
 
         const addNewTaskBtn = document.createElement("button");
         addNewTaskBtn.textContent = "+ New Task";
@@ -160,8 +165,6 @@
             modalOverlay.style.display = "block";
             modalWindow.style.display = "block";
         });
-
-        //document.body.appendChild(addNewTaskBtn);
 
         const title = Title({ text: "To Do List"});
         title.classList.add("Title");

@@ -109,6 +109,22 @@ line-height: 2.5;
     font-size: 16px;
 }
 
+.ModalAddTaskBtn{
+    color: 
+    white;
+    width: 227.5px;
+    height: 52px;
+    background-color:  #0053CF;
+    border-radius: 15px;
+    border: 1px;
+    font-weight: 700;
+    margin-top: 45%;
+    font-size: 16px;
+}   
+
+
+
+
 .ModalOverlay{
     position: fixed;
     top: 0;
