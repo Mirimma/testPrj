@@ -161,16 +161,7 @@
             modalWindow.style.display = "block";
         });
 
-        document.body.appendChild(addNewTaskBtn);
-
-        //const modalWindow = CreateModal({ titleText: "Add New Task", cancelBtnText: "Cancel" });
-
-        // const button = Button({ text: "+ New Task", onClick: () => {
-        //     modalOverlay.style.display = "block";
-        //     modalWindow.style.display = "block";
-        // }});
-        // button.classList.add("AddTaskBtn");
-        // document.body.appendChild(button);
+        //document.body.appendChild(addNewTaskBtn);
 
         const title = Title({ text: "To Do List"});
         title.classList.add("Title");
@@ -179,6 +170,7 @@
         searchField.classList.add("SearchBox");
         searchField.placeholder = "Search Task";
 
+
         const allTasksTitle = AllTasksTitle({text: "All Tasks"});
         allTasksTitle.classList.add("AllTasksTitle");
 
@@ -186,7 +178,7 @@
         completedTasksTitle.classList.add("CompletedTasksTitle");
 
 
-        div.append(title, searchField, allTasksTitle, list, completedTasksTitle);
+        div.append(title, searchField, addNewTaskBtn, allTasksTitle, list, completedTasksTitle);
 
         return div;
     }
