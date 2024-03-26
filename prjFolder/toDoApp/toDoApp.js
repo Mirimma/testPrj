@@ -81,11 +81,6 @@
         return title;
     }
 
-    // function ModalOverlay() {
-    //     const modalOverlay = document.createElement("div");
-    //     return modalOverlay;
-    // }
-
     function SearchField({ text }) {
         const searchField = document.createElement("input");
         searchField.innerHTML = text;
@@ -104,33 +99,35 @@
         return completedTasksTitle;
     }
 
-function CreateModal({ titleText, cancelBtnText }) {
-    const modalOverlay = document.createElement("div");
-    modalOverlay.classList.add("ModalOverlay");
+    function CreateModal({ titleText, cancelBtnText }) {
+        const modalOverlay = document.createElement("div");
+        modalOverlay.classList.add("ModalOverlay");
+        modalOverlay.style.display = "none";
 
-    document.body.appendChild(modalOverlay);
+        document.body.appendChild(modalOverlay);
 
-    const modalWindow = document.createElement("div");
-    modalWindow.classList.add("Modal");
-    modalOverlay.appendChild(modalWindow);
+        const modalWindow = document.createElement("div");
+        modalWindow.classList.add("Modal");
+        modalWindow.style.display = "none";
+        modalOverlay.appendChild(modalWindow);
 
-    const modalTitle = document.createElement("title");
-    modalTitle.classList.add("ModalTitle");
-    modalTitle.textContent = titleText;
+        const modalTitle = document.createElement("title");
+        modalTitle.classList.add("ModalTitle");
+        modalTitle.textContent = titleText;
 
-    const cancelBtn = document.createElement("button");
-    cancelBtn.classList.add("ModalCancelBtn");
-    cancelBtn.textContent = cancelBtnText;
+        const cancelBtn = document.createElement("button");
+        cancelBtn.classList.add("ModalCancelBtn");
+        cancelBtn.textContent = cancelBtnText;
 
-    cancelBtn.addEventListener("click", () => {
-    modalOverlay.style.display = "none";
-    });
+        cancelBtn.addEventListener("click", () => {
+        modalOverlay.style.display = "none";
+        });
 
-    modalWindow.appendChild(modalTitle);
-    modalWindow.appendChild(cancelBtn);
+        modalWindow.appendChild(modalTitle);
+        modalWindow.appendChild(cancelBtn);
 
-    return modalWindow;
-}
+        return { modalOverlay, modalWindow };
+    }
 
 
 
@@ -153,35 +150,27 @@ function CreateModal({ titleText, cancelBtnText }) {
         const list = ListItem({ items });
         list.classList.add("Li");
 
-        const modalWindow = CreateModal({ titleText: "Add New Task", cancelBtnText: "Cancel" });
-        document.body.appendChild(modalWindow);
+        const { modalOverlay, modalWindow } = CreateModal({ titleText: "Add New Task", cancelBtnText: "Cancel" });
 
-        // const modalOverlay = modalOverlay({});
-        // //modalOverlay.classList.add("ModalOverlay");
-        // document.body.appendChild(modalOverlay);
-        // modalOverlay.appendChild(modalWindow);
+        const addNewTaskBtn = document.createElement("button");
+        addNewTaskBtn.textContent = "+ New Task";
+        addNewTaskBtn.classList.add("AddTaskBtn");
 
-        // button.addEventListener("click", () => {
-        //     const modalWindow = CreateModal({ text: "Modal Title" });
-        //     document.body.appendChild(modalWindow);
-        //     modalWindow.style.display = "block";
-    
-        // });
-        // document.body.appendChild(button);
-
-        const button = Button({ text: "+ New Task", onClick: () => {
+        addNewTaskBtn.addEventListener("click", () => {
+            modalOverlay.style.display = "block";
             modalWindow.style.display = "block";
-        }});
-        button.classList.add("AddTaskBtn");
+        });
 
-        // const cancelBtn = Button({
-        //     text: "Cancel", onClick: () => {
-        //         modalWindow.style.display = "none";
-        //     }
-        // });
-        //cancelBtn.appendChild(modalWindow);
+        document.body.appendChild(addNewTaskBtn);
 
+        //const modalWindow = CreateModal({ titleText: "Add New Task", cancelBtnText: "Cancel" });
 
+        // const button = Button({ text: "+ New Task", onClick: () => {
+        //     modalOverlay.style.display = "block";
+        //     modalWindow.style.display = "block";
+        // }});
+        // button.classList.add("AddTaskBtn");
+        // document.body.appendChild(button);
 
         const title = Title({ text: "To Do List"});
         title.classList.add("Title");
@@ -197,7 +186,7 @@ function CreateModal({ titleText, cancelBtnText }) {
         completedTasksTitle.classList.add("CompletedTasksTitle");
 
 
-        div.append(title, searchField, button, allTasksTitle, list, completedTasksTitle);
+        div.append(title, searchField, allTasksTitle, list, completedTasksTitle);
 
         return div;
     }
