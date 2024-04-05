@@ -82,6 +82,7 @@ line-height: 2.5;
     margin-left: 30%;
     margin-top: 100px;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .ModalTitle{
@@ -122,7 +123,25 @@ line-height: 2.5;
     font-size: 16px;
 }   
 
-
+.TaskTitleInput{
+    margin-left: 40px;
+    margin-bottom: -100px;
+    border-radius: 15px;
+    width: 400px;
+    height: 52px;
+    border-radius: 12px;
+    border-width: 1px;
+    border-color: #D2D2D2;
+    margin-right: 40px;
+    background-color: 
+#F5F5F5;
+margin-bottom: 35px;
+&::placeholder{
+    color: 
+#838383;
+font-size: 16px;
+}
+}
 
 
 .ModalOverlay{

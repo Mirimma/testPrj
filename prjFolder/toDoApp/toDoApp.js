@@ -99,7 +99,7 @@
         return completedTasksTitle;
     }
 
-    function CreateModal({ titleText, cancelBtnText, addTaskBtnText }) {
+    function CreateModal({ titleText, newTaskText, cancelBtnText, addTaskBtnText }) {
         const modalOverlay = document.createElement("div");
         modalOverlay.classList.add("ModalOverlay");
         modalOverlay.style.display = "none";
@@ -127,7 +127,13 @@
         addTaskBtn.classList.add("ModalAddTaskBtn");
         addTaskBtn.textContent = addTaskBtnText;
 
+        const taskTitleInput = document.createElement("input");
+        taskTitleInput.classList.add("TaskTitleInput");
+        taskTitleInput.innerHTML = newTaskText;
+
+
         modalWindow.appendChild(modalTitle);
+        modalWindow.appendChild(taskTitleInput);
         modalWindow.appendChild(cancelBtn);
         modalWindow.appendChild(addTaskBtn);
 
