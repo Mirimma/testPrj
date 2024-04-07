@@ -131,11 +131,14 @@
         taskTitleInput.classList.add("TaskTitleInput");
         taskTitleInput.innerHTML = newTaskText;
 
+        const modalBtnsContainer = document.createElement("div");
+        modalBtnsContainer.classList.add("ModalBtnsContainer");
+        modalBtnsContainer.appendChild(cancelBtn);
+        modalBtnsContainer.appendChild(addTaskBtn);
 
         modalWindow.appendChild(modalTitle);
         modalWindow.appendChild(taskTitleInput);
-        modalWindow.appendChild(cancelBtn);
-        modalWindow.appendChild(addTaskBtn);
+        modalWindow.appendChild(modalBtnsContainer);
 
         return { modalOverlay, modalWindow };
     }
@@ -168,8 +171,8 @@
         addNewTaskBtn.classList.add("AddTaskBtn");
 
         addNewTaskBtn.addEventListener("click", () => {
-            modalOverlay.style.display = "block";
-            modalWindow.style.display = "block";
+            modalOverlay.style.display = "flex";
+            modalWindow.style.display = "flex";
         });
 
         const title = Title({ text: "To Do List"});
