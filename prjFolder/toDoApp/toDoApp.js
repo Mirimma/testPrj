@@ -127,6 +127,29 @@
         addTaskBtn.classList.add("ModalAddTaskBtn");
         addTaskBtn.textContent = addTaskBtnText;
 
+        let items = ["Task 1", "Task 2", "Task 3"];
+        let taskTitle = "";
+
+        const taskList = document.getElementById("UL Li");
+
+        function addItem() {
+            if(taskTitle.trim() !== "") {
+                items.push(`Task ${items.length + 1}: ${taskTitle}`);
+                taskTitle = "";
+                taskList.innerHTML = "";
+
+                items.forEach((item, index) => {
+                    const li = document.createElement("li");
+                    li.textContent = item;
+                    taskList.appendChild(li);
+                });              
+            }
+        };
+      
+        addTaskBtn.addEventListener("click", () => {
+           addItem(); 
+        });
+
         const taskTitleInput = document.createElement("input");
         taskTitleInput.classList.add("TaskTitleInput");
         taskTitleInput.innerHTML = newTaskText;
