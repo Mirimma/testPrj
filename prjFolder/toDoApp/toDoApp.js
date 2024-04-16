@@ -81,11 +81,6 @@
         return title;
     }
 
-    // function ModalOverlay() {
-    //     const modalOverlay = document.createElement("div");
-    //     return modalOverlay;
-    // }
-
     function SearchField({ text }) {
         const searchField = document.createElement("input");
         searchField.innerHTML = text;
@@ -104,33 +99,72 @@
         return completedTasksTitle;
     }
 
-function CreateModal({ titleText, cancelBtnText }) {
-    const modalOverlay = document.createElement("div");
-    modalOverlay.classList.add("ModalOverlay");
+    function CreateModal({ titleText, newTaskText, cancelBtnText, addTaskBtnText }) {
+        const modalOverlay = document.createElement("div");
+        modalOverlay.classList.add("ModalOverlay");
+        modalOverlay.style.display = "none";
 
-    document.body.appendChild(modalOverlay);
+        document.body.appendChild(modalOverlay);
 
-    const modalWindow = document.createElement("div");
-    modalWindow.classList.add("Modal");
-    modalOverlay.appendChild(modalWindow);
+        const modalWindow = document.createElement("div");
+        modalWindow.classList.add("Modal");
+        modalWindow.style.display = "none";
+        modalOverlay.appendChild(modalWindow);
 
-    const modalTitle = document.createElement("title");
-    modalTitle.classList.add("ModalTitle");
-    modalTitle.textContent = titleText;
+        const modalTitle = document.createElement("title");
+        modalTitle.classList.add("ModalTitle");
+        modalTitle.textContent = titleText;
 
-    const cancelBtn = document.createElement("button");
-    cancelBtn.classList.add("ModalCancelBtn");
-    cancelBtn.textContent = cancelBtnText;
+        const cancelBtn = document.createElement("button");
+        cancelBtn.classList.add("ModalCancelBtn");
+        cancelBtn.textContent = cancelBtnText;
 
-    cancelBtn.addEventListener("click", () => {
-    modalOverlay.style.display = "none";
-    });
+        cancelBtn.addEventListener("click", () => {
+        modalOverlay.style.display = "none";
+        });
 
-    modalWindow.appendChild(modalTitle);
-    modalWindow.appendChild(cancelBtn);
+        const addTaskBtn = document.createElement("button");
+        addTaskBtn.classList.add("ModalAddTaskBtn");
+        addTaskBtn.textContent = addTaskBtnText;
 
-    return modalWindow;
-}
+        let items = ["Task 1", "Task 2", "Task 3"];
+        let taskTitle = "";
+
+        const taskList = document.getElementById("UL Li");
+
+        function addItem() {
+            if(taskTitle.trim() !== "") {
+                items.push(`Task ${items.length + 1}: ${taskTitle}`);
+                taskTitle = "";
+                taskList.innerHTML = "";
+
+                items.forEach((item, index) => {
+                    const li = document.createElement("li");
+                    li.textContent = item;
+                    taskList.appendChild(li);
+                });              
+            }
+        };
+      
+        addTaskBtn.addEventListener("click", () => {
+           addItem(); 
+        });
+
+        const taskTitleInput = document.createElement("input");
+        taskTitleInput.classList.add("TaskTitleInput");
+        taskTitleInput.innerHTML = newTaskText;
+
+        const modalBtnsContainer = document.createElement("div");
+        modalBtnsContainer.classList.add("ModalBtnsContainer");
+        modalBtnsContainer.appendChild(cancelBtn);
+        modalBtnsContainer.appendChild(addTaskBtn);
+
+        modalWindow.appendChild(modalTitle);
+        modalWindow.appendChild(taskTitleInput);
+        modalWindow.appendChild(modalBtnsContainer);
+
+        return { modalOverlay, modalWindow };
+    }
 
 
 
@@ -153,35 +187,16 @@ function CreateModal({ titleText, cancelBtnText }) {
         const list = ListItem({ items });
         list.classList.add("Li");
 
-        const modalWindow = CreateModal({ titleText: "Add New Task", cancelBtnText: "Cancel" });
-        document.body.appendChild(modalWindow);
+        const { modalOverlay, modalWindow } = CreateModal({ titleText: "Add New Task", cancelBtnText: "Cancel", addTaskBtnText: "Add Task" });
 
-        // const modalOverlay = modalOverlay({});
-        // //modalOverlay.classList.add("ModalOverlay");
-        // document.body.appendChild(modalOverlay);
-        // modalOverlay.appendChild(modalWindow);
+        const addNewTaskBtn = document.createElement("button");
+        addNewTaskBtn.textContent = "+ New Task";
+        addNewTaskBtn.classList.add("AddTaskBtn");
 
-        // button.addEventListener("click", () => {
-        //     const modalWindow = CreateModal({ text: "Modal Title" });
-        //     document.body.appendChild(modalWindow);
-        //     modalWindow.style.display = "block";
-    
-        // });
-        // document.body.appendChild(button);
-
-        const button = Button({ text: "+ New Task", onClick: () => {
-            modalWindow.style.display = "block";
-        }});
-        button.classList.add("AddTaskBtn");
-
-        // const cancelBtn = Button({
-        //     text: "Cancel", onClick: () => {
-        //         modalWindow.style.display = "none";
-        //     }
-        // });
-        //cancelBtn.appendChild(modalWindow);
-
-
+        addNewTaskBtn.addEventListener("click", () => {
+            modalOverlay.style.display = "flex";
+            modalWindow.style.display = "flex";
+        });
 
         const title = Title({ text: "To Do List"});
         title.classList.add("Title");
@@ -190,6 +205,7 @@ function CreateModal({ titleText, cancelBtnText }) {
         searchField.classList.add("SearchBox");
         searchField.placeholder = "Search Task";
 
+
         const allTasksTitle = AllTasksTitle({text: "All Tasks"});
         allTasksTitle.classList.add("AllTasksTitle");
 
@@ -197,7 +213,7 @@ function CreateModal({ titleText, cancelBtnText }) {
         completedTasksTitle.classList.add("CompletedTasksTitle");
 
 
-        div.append(title, searchField, button, allTasksTitle, list, completedTasksTitle);
+        div.append(title, searchField, addNewTaskBtn, allTasksTitle, list, completedTasksTitle);
 
         return div;
     }

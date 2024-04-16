@@ -45,6 +45,7 @@ font-size: 16px;
     color: #0053CF;
     font-weight: 800;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .AllTasksTitle, .CompletedTasksTitle {
@@ -69,19 +70,29 @@ line-height: 2.5;
 
 .TrashBinIcon{
     margin-left: 30%;
+    cursor: pointer;
+}
+
+.ModalOverlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
 }
 
 .Modal{
-    display: flex;
     background-color: #fff;
     position: relative;
     z-index: 1;
-    overflow: auto;
     width: 524px;
     height: 371px;
     margin-left: 30%;
     margin-top: 100px;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .ModalTitle{
@@ -95,19 +106,56 @@ line-height: 2.5;
     font-size: 24px;
 }
 
+.ModalBtnsContainer{
+    justify-content: space-between;
+    display: flex;
+    margin-top: 135px;
+    width: fit-content;
+}
+
 .ModalCancelBtn{
     color: 
 #0053CF;
     width: 227.5px;
     height: 52px;
+    background-color: white;
+    border-color: unset;
+    border-radius: 15px;
+    border: 1px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
 }
 
-.ModalOverlay{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
+.ModalAddTaskBtn{
+    color: 
+    white;
+    width: 227.5px;
+    height: 52px;
+    background-color:  #0053CF;
+    border-radius: 15px;
+    border: 1px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+}   
+
+.TaskTitleInput{
+    margin-left: 40px;
+    border-radius: 15px;
+    width: 400px;
+    height: 52px;
+    border-radius: 12px;
+    border-width: 1px;
+    border-color: #D2D2D2;
+    margin-right: 40px;
+    margin-top: 20px;
+    background-color: 
+#F5F5F5;
+margin-bottom: 35px;
+&::placeholder{
+    color: 
+#838383;
+font-size: 16px;
+}
 }
